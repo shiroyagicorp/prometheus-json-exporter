@@ -133,11 +133,11 @@ var indexHTML = []byte(`<html>
 
 func main() {
 	addr := flag.String("listen-address", ":9116", "The address to listen on for HTTP requests.")
+	flag.Parse()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write(indexHTML)
 	})
-	flag.Parse()
 	http.HandleFunc("/probe", probeHandler)
 	http.Handle("/metrics", promhttp.Handler())
 
