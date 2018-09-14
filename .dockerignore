@@ -2,3 +2,4 @@ vendor
 Dockerfile
 Makefile
 README.md
+.git

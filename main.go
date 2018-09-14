@@ -138,5 +138,7 @@ func main() {
 	flag.Parse()
 	http.HandleFunc("/probe", probeHandler)
 	http.Handle("/metrics", promhttp.Handler())
+
+	log.Printf("listenning on %s", *addr)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }

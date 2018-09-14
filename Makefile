@@ -1,3 +1,5 @@
+.PHONY: build pull push
+
 IMAGE_NAME = shiroyagi/prometheus-json-exporter
 
 build:
