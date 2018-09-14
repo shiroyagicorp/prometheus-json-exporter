@@ -97,6 +97,8 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	prefix := params.Get("prefix")
+
 	jsonData, err := doProbe(target)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -108,7 +110,7 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 	WalkJSON("", jsonData, ReceiverFunc(func(key string, value float64) {
 		g := prometheus.NewGauge(
 			prometheus.GaugeOpts{
-				Name: key,
+				Name: prefix + key,
 				Help: "Retrieved value",
 			},
 		)
