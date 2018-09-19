@@ -57,21 +57,13 @@ func WalkJSON(path string, jsonData interface{}, receiver Receiver) {
 	}
 }
 
-func doProbe(target string) (interface{}, error) {
-	client := &http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-		},
-	}
-
+func doProbe(client *http.Client, target string) (interface{}, error) {
 	resp, err := client.Get(target)
 	if err != nil {
 		return nil, err
 	}
-
 	defer resp.Body.Close()
+
 	bytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
@@ -86,6 +78,19 @@ func doProbe(target string) (interface{}, error) {
 	return jsonData, nil
 }
 
+var httpClient *http.Client
+
+func init() {
+	httpClient = &http.Client{
+		Transport: &http.Transport{
+			MaxIdleConns: 100,
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+}
+
 func probeHandler(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
 
@@ -97,8 +102,9 @@ func probeHandler(w http.ResponseWriter, r *http.Request) {
 
 	prefix := params.Get("prefix")
 
-	jsonData, err := doProbe(target)
+	jsonData, err := doProbe(httpClient, target)
 	if err != nil {
+		log.Print(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	// log.Printf("Retrieved value %v", jsonData)
