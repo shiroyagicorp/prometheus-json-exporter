@@ -45,11 +45,9 @@ func WalkJSON(path string, jsonData interface{}, receiver Receiver) {
 			WalkJSON(fmt.Sprintf("%s%d", prefix, i), x, receiver)
 		}
 	case map[string]interface{}:
-		var prefix string
+		prefix := ""
 		if path != "" {
-			prefix = path + "."
-		} else {
-			prefix = ""
+			prefix = path + "::"
 		}
 		for k, x := range v {
 			WalkJSON(fmt.Sprintf("%s%s", prefix, k), x, receiver)
