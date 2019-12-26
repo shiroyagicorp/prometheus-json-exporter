@@ -1,3 +1,4 @@
+dist
 vendor
 prometheus-json-exporter
 .vscode
