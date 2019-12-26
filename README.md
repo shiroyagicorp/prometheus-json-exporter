@@ -1,18 +1,14 @@
-prometheus-json-exporter
-==============================
+# prometheus-json-exporter
 
-A prometheus exporter which fetches arbitrary JSON from remote API and
-exports the values as gauge metrics.
+A prometheus exporter which fetches arbitrary JSON from remote API and exports the values as gauge metrics.
 
-Installation
---------------------
+## Installation
 
 ```
-$ go get github.com/shiroyagicorp/prometheus-json-exporter
+$ go get github.com/gtirloni/prometheus-json-exporter
 ```
 
-Example Usage
---------------------
+## Example Usage
 
 ```
 $ curl -s "http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D"
@@ -39,12 +35,6 @@ size 1
 validate 1
 ```
 
-Note
-----------
-
-This repository is a fork of https://github.com/tolleiv/json-exporter
-
-License
-----------
+## License
 
 MIT License
