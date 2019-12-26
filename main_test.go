@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/shiroyagicorp/prometheus-json-exporter"
+	"github.com/gtirloni/prometheus-json-exporter"
 )
 
 type kvPair struct {
