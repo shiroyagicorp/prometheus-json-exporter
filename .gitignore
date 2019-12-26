@@ -1,2 +1,4 @@
 vendor
 prometheus-json-exporter
+.vscode
+*.swp
