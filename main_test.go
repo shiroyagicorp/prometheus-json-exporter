@@ -71,23 +71,23 @@ func TestWalkJSON(t *testing.T) {
 			name:  "nested value",
 			bytes: []byte(`{"x": {"y": 1}}`),
 			expected: []kvPair{
-				kvPair{key: "x.y", value: 1.0},
+				kvPair{key: "x::y", value: 1.0},
 			},
 		},
 		{
 			name:  "nested^2 value",
 			bytes: []byte(`{"x": {"y": {"z": 1}}}`),
 			expected: []kvPair{
-				kvPair{key: "x.y.z", value: 1.0},
+				kvPair{key: "x::y::z", value: 1.0},
 			},
 		},
 		{
 			name:  "array in nested value",
 			bytes: []byte(`{"x": {"y": [1, 2, 3]}}`),
 			expected: []kvPair{
-				kvPair{key: "x.y__0", value: 1},
-				kvPair{key: "x.y__1", value: 2},
-				kvPair{key: "x.y__2", value: 3},
+				kvPair{key: "x::y__0", value: 1},
+				kvPair{key: "x::y__1", value: 2},
+				kvPair{key: "x::y__2", value: 3},
 			},
 		},
 		{
