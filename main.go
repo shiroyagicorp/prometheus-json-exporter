@@ -140,7 +140,10 @@ func main() {
 	flag.Parse()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(indexHTML)
+		_, err := w.Write(indexHTML)
+		if err != nil {
+			log.Print(err)
+		}
 	})
 	http.HandleFunc("/probe", probeHandler)
 	http.Handle("/metrics", promhttp.Handler())
