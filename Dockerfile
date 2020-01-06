@@ -1,6 +1,9 @@
 FROM golang:1.13 as builder
+
 COPY . /src
+
 WORKDIR /src
+
 RUN go build -ldflags "-linkmode external -extldflags -static"
 
 
