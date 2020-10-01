@@ -1,6 +1,6 @@
 .PHONY: build pull push
 
-IMAGE_NAME = shiroyagi/prometheus-json-exporter
+IMAGE_NAME = shiroyagicorp/prometheus-json-exporter
 
 build:
 	docker build -t $(IMAGE_NAME) .
